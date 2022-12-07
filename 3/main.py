@@ -20,13 +20,29 @@ priorities = 0
 for lines in rucksacks:
     first_compartments = lines[:len(lines)//2]
     second_compartments = lines[len(lines)//2:]
-    
+
+
     # Find letters that appear in both compartments
     common_letters = []
+    i = 0
     for first_letter in first_compartments:
+        if first_letter in second_compartments:
+            common_letters.append(first_letter)
+            # Delete the letter from the second compartment
+            second_compartments = second_compartments[:i] + second_compartments[i+1:]
+        +i
+        """
         for second_letter in second_compartments:
             if first_letter == second_letter:
                 common_letters.append(first_letter)
+                break
+        """
+    print(first_compartments)
+    print(second_compartments)
+    print(common_letters)
+    print("\n")
+        # First compartment - aabcde
+        # Second compartment - aabklju
 
     # Find the priority of each common letter
     for line in common_letters:
