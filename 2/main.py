@@ -21,8 +21,9 @@ f.close()
 #Remove the newline character from each element in the list
 data = [x.strip() for x in data]
 
+#Part 1
 #Create a function that calculates the score for a single round
-def calculate_score(opponent_choice, your_choice):
+def calculate_score_one(opponent_choice, your_choice):
     #Create a dictionary to store the scores for each round
     your_scores = {'X': 1, 'Y': 2, 'Z': 3}
     opponent_scores = {'A': 1, 'B': 2, 'C': 3}
@@ -53,13 +54,61 @@ def calculate_score(opponent_choice, your_choice):
     #Return the score
     return score
 
+#Part 2
+#Second column means: X - You should lose, Y - You should draw, Z - You should win
+#Create a function that calculates the score for a single round
+def calculate_score_two(opponent_choice, your_choice):
+    #your_scores = {'X': 1, 'Y': 2, 'Z': 3}
+
+    #If your_choice is X - You should lose
+    if your_choice == 'X':
+        #If opponent_choice is A - Rock, you should lose by playing Sicssors
+        if opponent_choice == 'A':
+            score = 3 + 0
+        #If opponent_choice is B - Paper, you should lose by playing Rock
+        elif opponent_choice == 'B':
+            score = 1 + 0
+        #If opponent_choice is C - Scissors, you should lose by playing Paper
+        else:
+            score = 2 + 0
+    #If your_choice is Y - You should draw
+    elif your_choice == 'Y':
+        #If opponent_choice is A - Rock, you should draw by playing Rock
+        if opponent_choice == 'A':
+            score = 1 + 3
+        #If opponent_choice is B - Paper, you should draw by playing Paper
+        elif opponent_choice == 'B':
+            score = 2 + 3
+        #If opponent_choice is C - Scissors, you should draw by playing Scissors
+        else:
+            score = 3 + 3
+    #If your_choice is Z - You should win
+    else:
+        #If opponent_choice is A - Rock, you should win by playing Paper
+        if opponent_choice == 'A':
+            score = 2 + 6
+        #If opponent_choice is B - Paper, you should win by playing Scissors
+        elif opponent_choice == 'B':
+            score = 3 + 6
+        #If opponent_choice is C - Scissors, you should win by playing Rock
+        else:
+            score = 1 + 6
+    #Return the score
+    return score
+
+
 #Find, loop over and calculate your_choice and opponent_choice
-total_score = 0
+total_score_one = 0
+total_score_two = 0
 for lines in data:
-    total_score += calculate_score(lines[0], lines[2])
+    total_score_one += calculate_score_one(lines[0], lines[2])
+    total_score_two += calculate_score_two(lines[0], lines[2])
 
 #Print the total score
-print(total_score)
+print('Part 1, Total score:')
+print(total_score_one)
+print('Part 2, Total score:')
+print(total_score_two)
 
 
 
