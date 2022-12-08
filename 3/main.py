@@ -1,3 +1,4 @@
+# Part 1
 # Every item type is identified by a single lowercase or uppercase letter
 # Eeach rucksack always has the same number of items in each of it's two compartments
 # First half of characters represent items in the first compartment
@@ -6,6 +7,14 @@
 # To priotitize item arrangement, every item can be converted to a priority
 # Lowercase itemm types a through z have proirity 1 through 26
 # Uppercase item types A through Z have priority 27 through 52
+
+# Part 2
+# Elves are divided into groups of three
+# Eeach elf carries a badge that identifies their group
+# The badge is the only item type carried by all three Elves
+# At most, two of the Elves will be carrying any other item type
+# Find the sum of priorities from all Elf groups
+
 
 # Open input.txt and read contents into a list
 with open('input.txt', 'r') as f:
@@ -20,40 +29,47 @@ priorities = 0
 for lines in rucksacks:
     first_compartments = lines[:len(lines)//2]
     second_compartments = lines[len(lines)//2:]
-
-
+    
     # Find letters that appear in both compartments
     common_letters = []
-    i = 0
     for first_letter in first_compartments:
         if first_letter in second_compartments:
             common_letters.append(first_letter)
-            # Delete the letter from the second compartment
-            second_compartments = second_compartments[:i] + second_compartments[i+1:]
-        +i
-        """
-        for second_letter in second_compartments:
-            if first_letter == second_letter:
-                common_letters.append(first_letter)
-                break
-        """
-    print(first_compartments)
-    print(second_compartments)
-    print(common_letters)
-    print("\n")
-        # First compartment - aabcde
-        # Second compartment - aabklju
 
     # Find the priority of each common letter
-    for line in common_letters:
-        for letter in line:
+    if common_letters[0].islower():
+        priorities += (ord(common_letters[0]) - 96)
+    else:
+        priorities += (ord(common_letters[0]) - 38)
+
+# Part 2
+# Find item types that appear in all three rucksacks
+group_lines = []
+group = []
+for line in rucksacks:
+    if len(group) == 3:
+        group_lines.append(group)
+        group = []
+    group.append(line)
+group_lines.append(group)
+
+# Find the item types that appear in all three rucksacks and add their priorities
+badge = []
+badge_priorities = 0
+for group in group_lines:
+    for letter in group[0]:
+        if letter in group[1] and letter in group[2]:
             if letter.islower():
-                priorities += (ord(letter) - 96)
+                badge_priorities += (ord(letter[0]) - 96)
             else:
-                priorities += (ord(letter) - 38)
+                badge_priorities += (ord(letter[0]) - 38)
+            break
 
 # Print priority score
 print(priorities)
+
+# Print badge priority score
+print(badge_priorities)
 
 
 
