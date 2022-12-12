@@ -52,6 +52,7 @@ with open("output.txt", "a") as f:
                 
         i += 2
         j += 1
-
+    f.write("\n")
+    f.write("Count: " + str(count))
 
 print(count)
