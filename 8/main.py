@@ -23,13 +23,13 @@ for row in range(len(content)):
                 if content[row][column] > max(content[:row][column]):
                     count += 1
                 # Check down
-                elif content[row][column] > max(content[row+1:][column]):
+                elif content[row][column] > max(content[row:][column]):
                     count += 1
                 # Check left
-                elif content[row][column] > max(content[row][:column+1]):
+                elif content[row][column] > max(content[row][:column]):
                     count += 1
                 # Check right
-                elif content[row][column] > max(content[row][column+1:]):
+                elif content[row][column] > max(content[row][column:]):
                     count += 1
 
 print(count)
